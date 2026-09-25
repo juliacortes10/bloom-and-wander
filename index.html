@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloom & Wander | E-Portfolio</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap');
+
+:root {
+  --cream: #fbf7ec;
+  --green: #435b3d;
+  --pink: #f1b5c5;
+  --ink: #263329;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+}
+
+header {
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  background: #fffdf2ed;
+  backdrop-filter: blur(14px);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid #ffffff70;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 23px;
+  letter-spacing: 1px;
+}
+
+.logo span { color: #b67b8c; }
+
+nav { display: flex; gap: 25px; }
+
+nav a {
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+nav a:hover { color: #b67b8c; }
+
+.hero {
+  position: relative;
+  min-height: 800px;
+  height: calc(100vh - 66px);
+  max-height: 1000px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #dce5d4;
+}
+
+/* Replace this URL with your own garden image if desired. */
+.garden-photo {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg,
+      #fff9e8c9 0%,
+      #fff9e875 33%,
+      transparent 70%),
+    linear-gradient(0deg,
+      #203a271a,
+      transparent 40%);
+}
+
+.intro {
+  position: absolute;
+  top: 8%;
+  left: 6%;
+  max-width: 470px;
+  z-index: 4;
+}
+
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 10px;
+  color: #5d7455;
+}
+
+.intro h1 {
+  font: 500 clamp(42px, 5vw, 69px)/1.08 'Playfair Display', serif;
+  margin: 17px 0;
+}
+
+.intro h1 em {
+  color: #a66f81;
+  font-weight: 400;
+}
+
+.intro p {
+  font: 16px/1.8 'Playfair Display', serif;
+  max-width: 350px;
+}
+
+.explore {
+  border: 1px solid #627653;
+  background: #fffaf0e8;
+  color: var(--green);
+  padding: 13px 20px;
+  border-radius: 40px;
+  margin-top: 12px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.explore:hover {
+  background: var(--green);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* The interactive garden map */
+.map {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.route {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.route path {
+  fill: none;
+  stroke: #fff6d5;
+  stroke-width: 3;
+  stroke-dasharray: 2 13;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 5px #fff);
+  opacity: .95;
+}
+
+.stop {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: 0;
+  background: transparent;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 5;
+  color: #28362a;
+}
+
+.bloom {
+  width: clamp(66px, 7vw, 92px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #fffdf0b8;
+  border: 1px solid #fff;
+  display: grid;
+  place-items: center;
+  font-size: clamp(35px, 4vw, 51px);
+  box-shadow: 0 0 0 5px #fff6d550,
+              0 8px 28px #23351e40;
+  backdrop-filter: blur(5px);
+  transition: transform .5s, box-shadow .5s;
+}
+
+.stop:hover .bloom,
+.stop.active .bloom {
+  transform: scale(1.18);
+  box-shadow: 0 0 0 9px #fff8d970,
+              0 0 35px #fff6bd;
+}
+
+.stop.active .bloom {
+  animation: bloom .65s ease;
+}
+
+@keyframes bloom {
+  0% { transform: scale(.7); }
+  65% { transform: scale(1.3) rotate(10deg); }
+  100% { transform: scale(1.18); }
+}
+
+.tag {
+  background: #fffaf0ed;
+  padding: 9px 16px;
+  border: 1px solid #fff;
+  border-radius: 30px;
+  font: 14px 'Playfair Display', serif;
+  box-shadow: 0 5px 15px #26332920;
+  white-space: nowrap;
+}
+
+/* Adjust these positions to match your garden image. */
+#p0 { left: 15%; top: 55%; }
+#p1 { left: 31%; top: 38%; }
+#p2 { left: 47%; top: 30%; }
+#p3 { left: 59%; top: 49%; }
+#p4 { left: 53%; top: 73%; }
+#p5 { left: 30%; top: 72%; }
+
+/* Animated butterfly */
+.butterfly {
+  position: absolute;
+  z-index: 8;
+  left: 15%;
+  top: 55%;
+  font-size: 39px;
+  pointer-events: none;
+  transform: translate(-50%, -90%);
+  transition: left 1.5s cubic-bezier(.2,.8,.2,1),
+              top 1.5s cubic-bezier(.2,.8,.2,1);
+  filter: drop-shadow(0 4px 5px #26332940);
+  animation: flutter .5s ease-in-out infinite alternate;
+}
+
+@keyframes flutter {
+  from { margin-top: 0; rotate: -9deg; }
+  to { margin-top: -12px; rotate: 9deg; }
+}
+
+/* Floating subject information */
+.panel {
+  position: absolute;
+  z-index: 10;
+  top: 14%;
+  right: 4%;
+  width: min(370px, 34%);
+  max-height: 74%;
+  overflow-y: auto;
+  padding: 27px;
+  background: #fffaf0e9;
+  backdrop-filter: blur(16px);
+  border: 1px solid #fff;
+  border-radius: 27px;
+  box-shadow: 0 20px 65px #26332925;
+  animatio
